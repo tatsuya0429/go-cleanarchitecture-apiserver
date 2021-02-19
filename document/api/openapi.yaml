@@ -1,0 +1,416 @@
+openapi: 3.0.3
+info:
+  title: Go CleanArchitecture Users API
+  description: |
+    # Features
+    - Create a user's name.
+    - Read a specified user's name.
+    - Read all users' names.
+    - Update a specified user's name.
+    - Delete a specified user's name.
+  contact:
+    name: ulwlu
+    url: https://github.com/ulwlu/Go-CleanArchitectire-APIServer
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+servers:
+- url: http://localhost:{port}
+  description: Local Development
+  variables:
+    port:
+      default: "8080"
+      enum:
+      - "80"
+      - "8080"
+security:
+- apikey_auth: []
+tags:
+- name: users
+  description: The data of Users operation
+paths:
+  /users:
+    get:
+      tags:
+      - users
+      summary: Get all users' names
+      description: '(description): Get all users'' names'
+      operationId: usersGET
+      responses:
+        "200":
+          description: Success operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Name'
+                x-content-type: application/json
+        "403":
+          description: You are not available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "429":
+          description: We banned too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "500":
+          description: Server went some wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "503":
+          description: Server is in maintenance mode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+      deprecated: false
+      x-swagger-router-controller: Users
+  /users/{userId}:
+    get:
+      tags:
+      - users
+      summary: Get a specified user's name
+      description: '(description): Get a specified user''s name'
+      operationId: usersUserIdGET
+      parameters:
+      - name: userId
+        in: path
+        description: user's id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: "123"
+      responses:
+        "200":
+          description: Success operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Name'
+              x-content-type: application/json
+        "403":
+          description: You are not available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "404":
+          description: Resource is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "429":
+          description: We banned too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "500":
+          description: Server went some wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "503":
+          description: Server is in maintenance mode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+      deprecated: false
+      x-swagger-router-controller: Users
+    put:
+      tags:
+      - users
+      summary: Update a specified user
+      description: '(description): Update a specified user'
+      operationId: usersUserIdPUT
+      parameters:
+      - name: userId
+        in: path
+        description: user's id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: "123"
+      requestBody:
+        description: '(description): User''s new name'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Name'
+        required: true
+      responses:
+        "200":
+          description: Success operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Name'
+              x-content-type: application/json
+        "400":
+          description: Invalid Request Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "403":
+          description: You are not available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "404":
+          description: Resource is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "429":
+          description: We banned too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "500":
+          description: Server went some wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "503":
+          description: Server is in maintenance mode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+      x-swagger-router-controller: Users
+    post:
+      tags:
+      - users
+      summary: Create a new user
+      description: '(description): Create a new user'
+      operationId: usersUserIdPOST
+      parameters:
+      - name: userId
+        in: path
+        description: user's id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: "123"
+      requestBody:
+        description: '(description): User''s name'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Name'
+        required: true
+      responses:
+        "201":
+          description: Success operation (Not send new location this time, but in
+            production, make sure it would be better to send user to new URL)
+          headers:
+            location:
+              description: New URL of created review
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: url
+        "400":
+          description: Invalid Request Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "403":
+          description: You are not available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "429":
+          description: We banned too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "500":
+          description: Server went some wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "503":
+          description: Server is in maintenance mode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+      x-swagger-router-controller: Users
+    delete:
+      tags:
+      - users
+      summary: Delete a specified user
+      description: '(description): Delete a specified user'
+      operationId: usersUserIdDELETE
+      parameters:
+      - name: userId
+        in: path
+        description: user's id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: "123"
+      responses:
+        "200":
+          description: Success operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Name'
+              x-content-type: application/json
+        "400":
+          description: Invalid Request Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "403":
+          description: You are not available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "404":
+          description: Resource is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "429":
+          description: We banned too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "500":
+          description: Server went some wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "503":
+          description: Server is in maintenance mode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+      x-swagger-router-controller: Users
+components:
+  schemas:
+    Name:
+      type: object
+      properties:
+        lastname:
+          type: string
+          example: Erick
+        firstname:
+          type: string
+          example: Johnson
+      example:
+        firstname: Johnson
+        lastname: Erick
+    ClientError:
+      type: object
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientErrors'
+    ClientErrors:
+      type: object
+      properties:
+        field:
+          type: string
+        code:
+          type: string
+  responses:
+    "400-BadRequest":
+      description: Invalid Request Parameter
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClientError'
+    "403-Forbidden":
+      description: You are not available
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClientError'
+    "404-NotFound":
+      description: Resource is not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClientError'
+    "429-TooManyRequests":
+      description: We banned too many requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClientError'
+    "500-ServerError":
+      description: Server went some wrong
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClientError'
+    "503-ServerMaintenance":
+      description: Server is in maintenance mode
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClientError'
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      description: user's id
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+      example: "123"
+  securitySchemes:
+    apikey_auth:
+      type: apiKey
+      description: API Key authorization (Not used this time, but if you are in production,
+        Make sure you'll send JWT to third party and make them use it in header)
+      name: X-Api-Key
+      in: header

@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  api-server:
+    container_name: api-server
+    build:
+      context: .
+      dockerfile: ./docker/api-server/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src:/go/src/github.com/ulwlu/go-rest
+    tty: true
+    restart: always
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: db
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    ports:
+      - "3306:3306"
+    volumes:
+      # gorm can struct->automigrate as well
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql/mount:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: sampledb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+
+  document:
+    container_name: document
+    build:
+      context: .
+      dockerfile: ./docker/document/Dockerfile
+    ports:
+      - "80:8080"
+    volumes:
+      - ./document:/app
