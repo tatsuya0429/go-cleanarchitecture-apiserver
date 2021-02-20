@@ -1,6 +1,6 @@
-# Go Clean Architecture
+# CRUD API Server of Clean Architecture
 
-- echo
+- Go(echo)
 - gorm
 - mysql
 - docker
@@ -36,15 +36,26 @@ http://localhost/docs/
 <img width="300" alt="ulwlu/Go-CleanArchitecture-APIServer" src="https://user-images.githubusercontent.com/41639488/108515026-f4906080-7307-11eb-8496-796cfb60393e.png">
 <img width="300" alt="ulwlu/Go-CleanArchitecture-APIServer" src="https://user-images.githubusercontent.com/41639488/108515028-f528f700-7307-11eb-8bab-4773211bd161.png">
 
+## Article
+
+https://zenn.dev/ulwlu/scraps/170d2d2412daf7
+
 ## Thanks
 
 I learned a lot from these articles.
 
 https://nrslib.com/clean-architecture/
+
 https://www.slideshare.net/masuda220/powered-by-spring
+
 https://qiita.com/tono-maron/items/345c433b86f74d314c8d
+
 https://medium.com/eureka-engineering/go-dependency-inversion-principle-8ffaf7854a55
+
 https://qiita.com/hirotakan/items/698c1f5773a3cca6193e
-https://qiita.com/Le0tk0k/items/c2945c260f28f7ee2d47
-https://qiita.com/so-heee/items/0cca93008eae635c642a
+
 https://qiita.com/ryokky59/items/6c2b35169fb6acafce15
+
+https://qiita.com/Le0tk0k/items/c2945c260f28f7ee2d47
+
+https://qiita.com/so-heee/items/0cca93008eae635c642a
