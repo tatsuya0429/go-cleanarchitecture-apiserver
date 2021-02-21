@@ -4,11 +4,13 @@ import (
 	"errors"
 )
 
+// TODO: Remove gorm meta data from model, because domain must not know technical knowledge.
+// However, conversion type is not smart in infrastructure layer. I'm just looking for a good idea.
 // User Struct of an user
 type User struct {
-	ID        int    `gorm:"primary_key" json:"id"`
-	LastName  string `json:"lastname"`
-	FirstName string `json:"firstname"`
+	ID        int `gorm:"primary_key"`
+	LastName  string
+	FirstName string
 }
 
 type Users []User
