@@ -6,9 +6,9 @@ import (
 
 // UserRepository Interface of an user repository
 type UserRepository interface {
-	Create(user *model.User) (*model.User, error)
-	ReadByID(id int) (*model.User, error)
-	ReadAll() (*model.Users, error)
-	Update(user *model.User) (*model.User, error)
-	Delete(user *model.User) error
+	Create(user *model.ModelUser) (*model.ModelUser, error)
+	ReadByID(id int) (*model.ModelUser, error)
+	ReadAll() (*model.ModelUsers, error)
+	Update(user *model.ModelUser) (*model.ModelUser, error)
+	Delete(user *model.ModelUser) error
 }

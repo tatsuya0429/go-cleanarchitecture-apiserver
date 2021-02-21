@@ -4,24 +4,22 @@ import (
 	"errors"
 )
 
-// TODO: Remove gorm meta data from model, because domain must not know technical knowledge.
-// However, conversion type is not smart in infrastructure layer. I'm just looking for a good idea.
-// User Struct of an user
-type User struct {
+// ModelUser Struct of an user
+type ModelUser struct {
 	ID        int `gorm:"primary_key"`
 	LastName  string
 	FirstName string
 }
 
-type Users []User
+type ModelUsers []ModelUser
 
 // NewUser Constructor of an user
-func NewUser(lastname, firstname string) (*User, error) {
+func NewUser(lastname, firstname string) (*ModelUser, error) {
 	if lastname == "" {
 		return nil, errors.New("性は必須です。")
 	}
 
-	user := &User{
+	user := &ModelUser{
 		LastName:  lastname,
 		FirstName: firstname,
 	}
@@ -30,7 +28,7 @@ func NewUser(lastname, firstname string) (*User, error) {
 }
 
 // SetUser Setter of an User
-func (user *User) SetUser(lastname, firstname string) error {
+func (user *ModelUser) SetUser(lastname, firstname string) error {
 	if lastname == "" {
 		return errors.New("性は必須です。")
 	}
