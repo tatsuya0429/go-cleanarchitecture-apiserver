@@ -77,10 +77,9 @@ exports.usersUserIdGET = function(userId) {
  * (description): Create a new user
  *
  * body Name (description): User's name
- * userId String user's id
  * no response value expected for this operation
  **/
-exports.usersUserIdPOST = function(body,userId) {
+exports.usersUserIdPOST = function(body) {
   return new Promise(function(resolve, reject) {
     resolve();
   });

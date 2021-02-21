@@ -33,8 +33,8 @@ module.exports.usersUserIdGET = function usersUserIdGET (req, res, next, userId)
     });
 };
 
-module.exports.usersUserIdPOST = function usersUserIdPOST (req, res, next, body, userId) {
-  Users.usersUserIdPOST(body, userId)
+module.exports.usersUserIdPOST = function usersUserIdPOST (req, res, next, body) {
+  Users.usersUserIdPOST(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

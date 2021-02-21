@@ -73,6 +73,56 @@ paths:
                 $ref: '#/components/schemas/ClientError'
       deprecated: false
       x-swagger-router-controller: Users
+    post:
+      tags:
+      - users
+      summary: Create a new user
+      description: '(description): Create a new user'
+      operationId: usersUserIdPOST
+      requestBody:
+        description: '(description): User''s name'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Name'
+        required: true
+      responses:
+        "201":
+          description: Success operation (Not send new location this time, but in
+            production, make sure it would be better to send user to new URL)
+          headers:
+            location:
+              description: New URL of created review
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: url
+        "403":
+          description: You are not available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "429":
+          description: We banned too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "500":
+          description: Server went some wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        "503":
+          description: Server is in maintenance mode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+      x-swagger-router-controller: Users
   /users/{userId}:
     get:
       tags:
@@ -175,72 +225,6 @@ paths:
                 $ref: '#/components/schemas/ClientError'
         "404":
           description: Resource is not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        "429":
-          description: We banned too many requests
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        "500":
-          description: Server went some wrong
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        "503":
-          description: Server is in maintenance mode
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-      x-swagger-router-controller: Users
-    post:
-      tags:
-      - users
-      summary: Create a new user
-      description: '(description): Create a new user'
-      operationId: usersUserIdPOST
-      parameters:
-      - name: userId
-        in: path
-        description: user's id
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-        example: "123"
-      requestBody:
-        description: '(description): User''s name'
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Name'
-        required: true
-      responses:
-        "201":
-          description: Success operation (Not send new location this time, but in
-            production, make sure it would be better to send user to new URL)
-          headers:
-            location:
-              description: New URL of created review
-              style: simple
-              explode: false
-              schema:
-                type: string
-                format: url
-        "400":
-          description: Invalid Request Parameter
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        "403":
-          description: You are not available
           content:
             application/json:
               schema:
