@@ -7,10 +7,10 @@ import (
 
 // UserUsecase Interface of an user usecase
 type UserUsecase interface {
-	Create(lastname, firstname string) (*model.User, error)
-	ReadByID(id int) (*model.User, error)
-	ReadAll() (*model.Users, error)
-	Update(id int, lastname, firstname string) (*model.User, error)
+	Create(lastname, firstname string) (*model.ModelUser, error)
+	ReadByID(id int) (*model.ModelUser, error)
+	ReadAll() (*model.ModelUsers, error)
+	Update(id int, lastname, firstname string) (*model.ModelUser, error)
 	Delete(id int) error
 }
 
@@ -24,7 +24,7 @@ func NewUserUsecase(userRepository repository.UserRepository) UserUsecase {
 }
 
 // Create Usecase to save an user
-func (userUsecase *userUsecase) Create(lastname, firstname string) (*model.User, error) {
+func (userUsecase *userUsecase) Create(lastname, firstname string) (*model.ModelUser, error) {
 	user, err := model.NewUser(lastname, firstname)
 	if err != nil {
 		return nil, err
@@ -39,7 +39,7 @@ func (userUsecase *userUsecase) Create(lastname, firstname string) (*model.User,
 }
 
 // ReadByID Usecase to read an user by id
-func (userUsecase *userUsecase) ReadByID(id int) (*model.User, error) {
+func (userUsecase *userUsecase) ReadByID(id int) (*model.ModelUser, error) {
 	foundUser, err := userUsecase.userRepository.ReadByID(id)
 	if err != nil {
 		return nil, err
@@ -49,7 +49,7 @@ func (userUsecase *userUsecase) ReadByID(id int) (*model.User, error) {
 }
 
 // ReadAll Usecase to read users
-func (userUsecase *userUsecase) ReadAll() (*model.Users, error) {
+func (userUsecase *userUsecase) ReadAll() (*model.ModelUsers, error) {
 	foundUsers, err := userUsecase.userRepository.ReadAll()
 	if err != nil {
 		return nil, err
@@ -59,7 +59,7 @@ func (userUsecase *userUsecase) ReadAll() (*model.Users, error) {
 }
 
 // Update Usecase to update an user
-func (userUsecase *userUsecase) Update(id int, lastname, firstname string) (*model.User, error) {
+func (userUsecase *userUsecase) Update(id int, lastname, firstname string) (*model.ModelUser, error) {
 	targetUser, err := userUsecase.userRepository.ReadByID(id)
 	if err != nil {
 		return nil, err
