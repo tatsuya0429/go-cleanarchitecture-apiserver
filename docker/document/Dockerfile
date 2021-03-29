@@ -1,9 +1,3 @@
-FROM mhart/alpine-node:12
-
-WORKDIR /app
-COPY ./document/package.json ./
-RUN npm install
-
-COPY ./document/. ./
+FROM swaggerapi/swagger-ui:v3.43.0
+COPY ./document/openapi.yaml /usr/share/nginx/html/swagger/
 EXPOSE 8080
-CMD ["npm", "start"]
