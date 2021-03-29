@@ -6,7 +6,7 @@ import (
 
 // ModelUser Struct of an user
 type ModelUser struct {
-	ID        int `gorm:"primary_key"`
+	ID        int
 	LastName  string
 	FirstName string
 }
