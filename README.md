@@ -1,5 +1,7 @@
 # CRUD API Server of Clean Architecture
 
+This Repository is forked from ulwlu/go-cleanarchitecture-apiserver.
+
 - Go(echo)
 - gorm
 - mysql
